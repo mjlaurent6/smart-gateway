@@ -72,7 +72,7 @@ export default function Navigator(props) {
               <ListItemText sx={{ color: "#fff" }}>{id}</ListItemText>
             </ListItem>
             {children.map(({ id: childId, icon, link }) => (
-              <Link to={`/gateway/${link}`} style={{ textDecoration: "none" }}>
+              <Link key={childId} to={`/gateway/${link}`} style={{ textDecoration: "none" }}>
                 <ListItem disablePadding key={childId}>
                   <ListItemButton sx={item}>
                     <ListItemIcon>{icon}</ListItemIcon>
@@ -81,7 +81,6 @@ export default function Navigator(props) {
                 </ListItem>
               </Link>
             ))}
-
             <Divider sx={{ mt: 2 }} />
           </Box>
         ))}

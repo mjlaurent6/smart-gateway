@@ -105,9 +105,9 @@ function Management() {
         </Tabs>
       </Box>
       {page === 0 && <Status />}
-      {page === 1 && <Status />}
-      {page === 2 && <Status />}
-      {page === 3 && <Status />}
+      {/*{page === 1 && <Status />}*/}
+      {/*{page === 2 && <Status />}*/}
+      {/*{page === 3 && <Status />}*/}
     </Container>
   );
 }

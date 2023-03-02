@@ -20,7 +20,8 @@
     "web-vitals": "^2.1.4",
     "mapbox-gl": "^2.12.0",
     "react-map-gl": "^7.0.21",
-    "react-hook-form": "^7.43.1"
+    "react-hook-form": "^7.43.1",
+    "mqtt": "^4.3.7"
   },
   "scripts": {
     "start": "react-scripts start",
