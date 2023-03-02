@@ -1,22 +1,15 @@
 import React, { useState } from "react";
-import AppBar from "@mui/material/AppBar";
-import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import { Container } from "@mui/material";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
 import { CreditCard, Lock, Person, Tune } from "@mui/icons-material";
-import Timeline from "@mui/lab/Timeline";
-import TimelineItem, { timelineItemClasses } from "@mui/lab/TimelineItem";
-import TimelineSeparator from "@mui/lab/TimelineSeparator";
-import TimelineContent from "@mui/lab/TimelineContent";
-import TimelineDot from "@mui/lab/TimelineDot";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
-import Status from "./Status";
+import MqttStatus from "./MqttStatus";
 
 function LinkTab(props) {
   return (
@@ -64,25 +57,7 @@ function Management() {
       <Typography sx={{ mb: 1 }} color="text.dark" variant="h6">
         {gateway}
       </Typography>
-      <Timeline
-        sx={{
-          [`& .${timelineItemClasses.root}:before`]: {
-            flex: 0,
-            padding: 0,
-          },
-          m: 0,
-          p: 0,
-        }}
-      >
-        <TimelineItem>
-          <TimelineSeparator>
-            <TimelineDot color="success" />
-          </TimelineSeparator>
-          <TimelineContent sx={{ fontSize: 12, pt: 1.1, pb: 0, mb: 0 }}>
-            Online
-          </TimelineContent>
-        </TimelineItem>
-      </Timeline>
+
       <Box sx={{ width: "100%", m: 0, p: 0, mb: 2 }}>
         <Tabs
           sx={{ ml: 0, minHeight: "36px" }}
@@ -104,7 +79,7 @@ function Management() {
           <LinkTab value={3} icon={<CreditCard />} label="ABOUT" />
         </Tabs>
       </Box>
-      {page === 0 && <Status />}
+      {page === 0 && <MqttStatus />}
       {/*{page === 1 && <Status />}*/}
       {/*{page === 2 && <Status />}*/}
       {/*{page === 3 && <Status />}*/}

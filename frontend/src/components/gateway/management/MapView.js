@@ -1,15 +1,18 @@
 import * as React from 'react'
-import {render} from 'react-dom'
 import Map, {Marker} from 'react-map-gl'
 
 import 'mapbox-gl/dist/mapbox-gl.css'
 import {useEffect, useState} from 'react'
 
-// const MAPBOX_TOKEN = 'pk.eyJ1IjoibWljcm9zdHVjazIiLCJhIjoiY2xjNzc5ZnR5MWYxaTNucGc3dXI1ZW9jbSJ9.oA3eGIumdRb785WUNBlLpg' // Set your mapbox token here
-const MAPBOX_TOKEN = 'EMPTY' // Set your mapbox token here
+const MAPBOX_TOKEN = process.env.REACT_APP_MAPBOX_TOKEN;
 
-function MapView({sensors}) {
-    const [sensorData, setSensorData] = useState(sensors);
+function MapView({location}) {
+    console.log(`token ${process.env.MAPBOX_TOKEN}`)
+    const [data, setData] = useState(location);
+    useEffect(()=>{
+        setData(location)
+        setViewState({...location, zoom: 15})
+    }, [location])
 
     // const [long, setLong] = useState(-122.4)
 
@@ -30,9 +33,9 @@ function MapView({sensors}) {
     // }, [sensors])
     // const {id, long, lat, color} = sensorData;
     const [viewState, setViewState] = useState({
-        latitude: 22.335901,
-        longitude: 114.263520,
-        zoom: 14
+        latitude: data.latitude,
+        longitude: data.longitude,
+        zoom: 15
     })
     return (
         <Map
@@ -42,7 +45,7 @@ function MapView({sensors}) {
             mapStyle="mapbox://styles/mapbox/streets-v9"
             mapboxAccessToken={MAPBOX_TOKEN}
         >
-            <Marker longitude={114.263520} latitude={22.335901} color="red"/>
+            <Marker longitude={data.longitude} latitude={data.latitude} color="red"/>
         </Map>
     );
 }
