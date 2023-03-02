@@ -18,12 +18,14 @@ import TimerIcon from "@mui/icons-material/Timer";
 import SettingsIcon from "@mui/icons-material/Settings";
 import PhonelinkSetupIcon from "@mui/icons-material/PhonelinkSetup";
 import { Link } from "react-router-dom";
+import { Add } from "@mui/icons-material";
 
 const categories = [
   {
     id: "Gateway",
     children: [
       { id: "Management", icon: <DnsRoundedIcon />, link: "management" },
+      { id: "Register", icon: <Add />, link: "add-gateway" },
     ],
   },
 ];

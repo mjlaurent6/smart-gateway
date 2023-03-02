@@ -16,7 +16,7 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
-import Status from "./controls/Status";
+import Status from "./Status";
 
 function LinkTab(props) {
   return (
@@ -33,7 +33,7 @@ function LinkTab(props) {
   );
 }
 
-function Control() {
+function Management() {
   const [page, setPage] = useState(0);
 
   const handlePage = (event, newValue) => {
@@ -47,7 +47,7 @@ function Control() {
   };
 
   return (
-    <Container sx={{ width: 936, margin: "auto", overflow: "hidden" }}>
+    <Container sx={{ minWidth: 1500, margin: "auto", overflow: "hidden" }}>
       <FormControl sx={{ mt: 1, mb: 1, width: 300 }} size="small">
         <InputLabel color="dark">Gateway ID</InputLabel>
         <Select
@@ -61,8 +61,8 @@ function Control() {
           <MenuItem value={"tko-2"}>tko-2</MenuItem>
         </Select>
       </FormControl>
-      <Typography sx={{ mb: 2 }} color="text.dark" variant="h6">
-        Settings
+      <Typography sx={{ mb: 1 }} color="text.dark" variant="h6">
+        {gateway}
       </Typography>
       <Timeline
         sx={{
@@ -78,7 +78,7 @@ function Control() {
           <TimelineSeparator>
             <TimelineDot color="success" />
           </TimelineSeparator>
-          <TimelineContent sx={{ fontSize: 12, pt: 1.1 }}>
+          <TimelineContent sx={{ fontSize: 12, pt: 1.1, pb: 0, mb: 0 }}>
             Online
           </TimelineContent>
         </TimelineItem>
@@ -112,4 +112,4 @@ function Control() {
   );
 }
 
-export default Control;
+export default Management;

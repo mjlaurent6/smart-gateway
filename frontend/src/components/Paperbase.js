@@ -6,11 +6,11 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Link from "@mui/material/Link";
 import Navigator from "./Navigator";
-import Content from "./contents/Content";
+import Content from "./gateway/contents/Content";
 import Header from "./Header";
 import { Outlet, useLocation } from "react-router-dom";
 
-const drawerWidth = 220;
+const drawerWidth = 256;
 
 export default function Paperbase({ content }) {
   const [mobileOpen, setMobileOpen] = React.useState(false);
@@ -36,7 +36,7 @@ export default function Paperbase({ content }) {
         <Header onDrawerToggle={handleDrawerToggle} />
         <Box
           component="main"
-          sx={{ flex: 1, py: 6, px: 4, bgcolor: "#eaeff1" }}
+          sx={{ flex: 1, py: 4, px: 2, bgcolor: "#eaeff1" }}
         >
           <Outlet />
         </Box>
