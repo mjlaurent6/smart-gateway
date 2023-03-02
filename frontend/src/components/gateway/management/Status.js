@@ -9,7 +9,7 @@ function StatusCard({item, value}) {
                 {item}
             </Typography>
             <Typography variant="h5" color="green">
-                {value}s
+                {value}
             </Typography>
         </CardContent>
     </Card>);

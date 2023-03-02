@@ -145,3 +145,8 @@ We add another service called **mongo** but this time instead of building it fro
 ### Database
 
 Port is available on 27018 on localhost, mapped from docker container port 27017
+
+
+### SCP .env files
+
+`scp .env lab2@143.89.144.31:~/deploy-test/smart-gateway/frontend/`
