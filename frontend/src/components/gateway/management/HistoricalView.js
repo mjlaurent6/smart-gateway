@@ -2,6 +2,11 @@ import React, {useState} from "react";
 import {Card, Grid, Typography} from "@mui/material";
 import MapView from "./MapView";
 import LiveDataGrid from "./LiveDataGrid";
+import Editor from "react-simple-code-editor";
+import {highlight, languages} from "prismjs/components/prism-core";
+import 'prismjs/components/prism-clike';
+import 'prismjs/components/prism-javascript';
+import 'prismjs/themes/prism.css'; //Example style, you can use another
 
 const messages = [
     {
@@ -75,22 +80,29 @@ function HistoricalView() {
     return (
         <React.Fragment>
             <Grid container spacing={2} sx={{pb: 1}}>
-                <Grid item xs={6}>
+                {selected && selected.message && selected.message.antenna_locations && <Grid item xs={7}>
+                    <Card elevation={2}>
+                        <MapView location={selected.message.antenna_locations[0]} size={0.7}/>
+                    </Card>
+                </Grid>}
+                <Grid item xs={5}>
+                    <Card elevation={2}>
+                        {selected && Object.keys(selected).length != 0 && <Editor
+                            value={JSON.stringify(selected, null, 2)}
+                            highlight={selected => highlight(selected, languages.js)}
+                            padding={10}
+                            style={{
+                                fontFamily: '"Fira code", "Fira Mono", monospace',
+                                fontSize: 12,
+                            }}
+                        />}
+                    </Card>
+                </Grid>
+                <Grid item xs={12}>
                     <Card elevation={2}>
                         <LiveDataGrid messages={messages} setSelected={setSelected}/>
                     </Card>
                 </Grid>
-                {selected && selected.message && selected.message.antenna_locations && <Grid item xs={6}>
-                    <Card elevation={2}>
-                        <MapView location={selected.message.antenna_locations[0]} size={0.5}/>
-                    </Card>
-                </Grid>}
-                <Grid item xs={12}>
-                    <Card elevation={2}>
-                        <pre>{JSON.stringify(selected, null, 2)}</pre>
-                    </Card>
-                </Grid>
-
             </Grid>
         </React.Fragment>
     )

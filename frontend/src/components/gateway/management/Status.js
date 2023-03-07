@@ -4,6 +4,7 @@ import MapView from "./MapView";
 import GatewayGrid from "./GatewayGrid";
 import LiveDataGrid from "./LiveDataGrid";
 import StatusCard from "./StatusCard";
+import JsonViewer from "./JsonViewer";
 
 function Status({payload, setConnectionStatus}) {
     const [messages, setMessages] = useState([]);
@@ -62,6 +63,7 @@ function Status({payload, setConnectionStatus}) {
                         <pre>{JSON.stringify(selected, null, 2)}</pre>
                     </Card>
                 </Grid>
+
             </React.Fragment>}
 
         </Grid>
