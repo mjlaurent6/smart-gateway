@@ -44,6 +44,11 @@ module.exports = {
         success: false,
         message: "User Already exists",
     },
+    GATEWAY_ALREADY_EXIST: {
+        code: 408,
+        success: false,
+        message: "GATEWAY Already exists",
+    },
     USER_NOT_FOUND: {
         code: 408,
         success: false,

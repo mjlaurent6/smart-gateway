@@ -10,6 +10,7 @@ const db = require("./db");
 const logger = require('morgan');
 
 const app = express();
+app.disable('etag');
 
 //connection from db here
 db.connect(app);
@@ -26,8 +27,8 @@ require("./routes/login")(app);
 require("./routes/gateway")(app);
 
 app.on("ready", () => {
-    app.listen(8000, () => {
-        console.log("Server is up on port", 8000);
+    app.listen(3000, () => {
+        console.log("Server is up on port", 3000);
     });
 });
 

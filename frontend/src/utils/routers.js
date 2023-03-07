@@ -7,6 +7,7 @@ import Paperbase from "../components/Paperbase";
 import SignIn from "../components/SignIn";
 import SignUp from "../components/SignUp";
 import GatewayMainPage from "../components/gateway/GatewayMainPage";
+import Dashboard from "../components/Dashboard";
 
 const router = createBrowserRouter([
     {
@@ -23,7 +24,7 @@ const router = createBrowserRouter([
         children: [
             {
                 path: "",
-                element: <RealtimeMonitoring/>,
+                element: <Dashboard/>,
             },
         ],
     },
@@ -36,11 +37,11 @@ const router = createBrowserRouter([
                 element: <GatewayMainPage/>,
             },
             {
-                path: "add-gateway",
+                path: "register",
                 element: <AddGateway/>,
             },
             {
-                path: ":id",
+                path: ":eui",
                 element: <RealtimeMonitoring/>,
             },
         ],

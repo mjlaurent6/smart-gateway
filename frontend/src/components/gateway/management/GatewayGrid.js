@@ -6,9 +6,11 @@ import {
     randomCreatedDate,
 } from '@mui/x-data-grid-generator';
 import {Link} from "react-router-dom";
+import {useEffect, useState} from "react";
+import axios from "axios";
 
 const columns = [
-    {field: 'id', headerName: 'ID', width: 240, editable: false},
+    {field: '_id', headerName: 'ID', width: 240, editable: false},
     {
         field: 'name',
         headerName: 'Name',
@@ -22,11 +24,14 @@ const columns = [
         editable: false,
     },
     {
-        field: 'dateCreated',
+        field: 'createdAt',
         headerName: 'Date Created',
-        type: 'date',
         width: 200,
         editable: false,
+        renderCell: (params) => {
+            const date = new Date(params.value).toLocaleString('en-HK', {timeZone: 'Asia/Hong_Kong'})
+            return <div>{date}</div>
+        }
     },
     {
         field: 'link',
@@ -34,50 +39,59 @@ const columns = [
         width: 200,
         editable: false,
         renderCell: (params) => (
-            <Link to={`/gateway/${params.value}`} style={{textDecoration: "none", color: "black"}}>Click here</Link>
+            <Link to={`/gateway/${params.row.eui}`} style={{textDecoration: "none", color: "black"}}>Click here</Link>
         )
     },
 ];
 
-const rows = [
-    {
-        id: "eui-1016c001f160f149",
-        name: 'Waveshare SX1303 868M fyp-gch6-2',
-        eui: '0016c001f160f149',
-        dateCreated: randomCreatedDate(),
-        link: '0016c001f160f149',
-    },
-    {
-        id: "eui-0011c001f160f149",
-        name: 'Waveshare SX1303 868M fyp-gch6-3',
-        eui: '0016c001f160a149',
-        dateCreated: randomCreatedDate(),
-        link: '0016c001f160a149'
-    },
-    {
-        id: "eui-0016c011f160f149",
-        name: 'Waveshare SX1303 868M fyp-gch6-1',
-        eui: '0016c001f16af149',
-        dateCreated: randomCreatedDate(),
-        link: '0016c001f160a149',
-    },
-    {
-        id: "eui-0016c001f260f149",
-        name: 'Waveshare SX1303 868M fyp-gch6-4',
-        eui: '0016c0012a60f149',
-        dateCreated: randomCreatedDate(),
-        link: '0016c001f160a149'
-    },
-];
+// const rows = [
+//     {
+//         id: "eui-1016c001f160f149",
+//         name: 'Waveshare SX1303 868M fyp-gch6-2',
+//         eui: '0016c001f160f149',
+//         dateCreated: randomCreatedDate(),
+//         link: '0016c001f160f149',
+//     },
+//     {
+//         id: "eui-0011c001f160f149",
+//         name: 'Waveshare SX1303 868M fyp-gch6-3',
+//         eui: '0016c001f160a149',
+//         dateCreated: randomCreatedDate(),
+//         link: '0016c001f160a149'
+//     },
+//     {
+//         id: "eui-0016c011f160f149",
+//         name: 'Waveshare SX1303 868M fyp-gch6-1',
+//         eui: '0016c001f16af149',
+//         dateCreated: randomCreatedDate(),
+//         link: '0016c001f160a149',
+//     },
+//     {
+//         id: "eui-0016c001f260f149",
+//         name: 'Waveshare SX1303 868M fyp-gch6-4',
+//         eui: '0016c0012a60f149',
+//         dateCreated: randomCreatedDate(),
+//         link: '0016c001f160a149'
+//     },
+// ];
 
 export default function GatewayGrid() {
+    const [rows, setRows] = useState([]);
+    useEffect(() => {
+        fetch("/api/gateway")
+            .then(response => response.json())
+            // 4. Setting *dogImage* to the image url that we received from the response above
+            .then(data => setRows(data.data))
+    }, [])
+
     return (
         <React.Fragment>
             <Typography sx={{mb: 1}} color="text.dark" variant="h6">
                 Registered Gateways
             </Typography>
-            <Box sx={{height: '80vh', width: '1400px', bgcolor: "white"}}>
+            <Box sx={{height: '80vh', width: '1500px', bgcolor: "white"}}>
                 <DataGrid
+                    getRowId={(row) => row._id}
                     rows={rows}
                     columns={columns}
                     initialState={{

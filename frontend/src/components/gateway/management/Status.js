@@ -1,6 +1,8 @@
 import {Card, CardContent, Grid, Typography} from "@mui/material";
 import React, {useEffect, useState} from "react";
 import MapView from "./MapView";
+import GatewayGrid from "./GatewayGrid";
+import LiveDataGrid from "./LiveDataGrid";
 
 function StatusCard({item, value}) {
     return (<Card elevation={2}>
@@ -15,27 +17,15 @@ function StatusCard({item, value}) {
     </Card>);
 }
 
-function OnlineStatus({status}) {
-
-    return (<div style={{display: "flex"}}>
-        <svg height="20" width="20">
-            <circle fill={status.color} stroke="none" cx="10" cy="10" r="10">
-                <animate attributeName="opacity" dur="1s" values="0;1;0" repeatCount="indefinite"
-                         begin="0.1"/>
-            </circle>
-        </svg>
-        <Typography sx={{pl: 1}} variant={"body2"}>{status.text}</Typography>
-    </div>);
-}
-
 function Status({payload, setConnectionStatus}) {
-    const [messages, setMessages] = useState();
+    const [messages, setMessages] = useState([]);
+    const [selected, setSelected] = useState({});
+
     useEffect(() => {
         console.log(`initializing interval`);
         const interval = setInterval(() => {
-            setMessages();
             setConnectionStatus(false);
-        }, 3000);
+        }, 40000);
 
         return () => {
             console.log(`clearing interval`);
@@ -44,16 +34,19 @@ function Status({payload, setConnectionStatus}) {
     }, [payload]);
     useEffect(() => {
         if (payload.topic) {
-            setMessages(JSON.parse(payload.message));
+            setMessages([...messages, JSON.parse(payload.message)]);
         }
     }, [payload])
     const {
+        message
+    } = messages.at(messages.length - 1) || {};
+    const {
         antenna_locations, metrics, time
-    } = messages || {};
+    } = message || {};
     const {
         temp, batt
     } = metrics || {};
-
+    console.log(messages)
     return (<React.Fragment>
         <Grid container spacing={2} sx={{pb: 1}}>
             {!time && <Grid item xs={3}><Typography>Realtime data not available</Typography></Grid>}
@@ -70,6 +63,19 @@ function Status({payload, setConnectionStatus}) {
                     <MapView location={antenna_locations[0]}/>
                 </Card>
             </Grid>}
+            {message && <React.Fragment>
+                <Grid item xs={7}>
+                    <Card elevation={2}>
+                        <LiveDataGrid messages={messages} setSelected={setSelected}/>
+                    </Card>
+                </Grid>
+                <Grid item xs={5}>
+                    <Card elevation={2}>
+                        <pre>{JSON.stringify(selected, null, 2)}</pre>
+                    </Card>
+                </Grid>
+            </React.Fragment>}
+
         </Grid>
     </React.Fragment>);
 }

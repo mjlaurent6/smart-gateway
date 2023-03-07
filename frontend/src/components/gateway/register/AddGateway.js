@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import {useForm} from "react-hook-form";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
@@ -25,23 +25,28 @@ function AddGateway() {
     } = useForm({
         defaultValues: {}
     });
-    const onSubmit = (data) => {
-        console.log(data);
-        reset();
+    const [logs, setLog] = useState("{}")
+    const onSubmit = async (data) => {
+        const response = await fetch("/api/gateway/register", {
+            method: 'POST', mode: 'cors', headers: {
+                "Content-Type": "application/json"
+            }, body: JSON.stringify(data),
+        })
+            .then((res) => res.json())
+            .then((result) => {
+                setLog(JSON.stringify(result, null, 2))
+                if (result.success) reset();
+            }).catch((e) => {
+                setLog(JSON.stringify(e))
+            })
     };
-
-    useEffect(() => {
-        if (formState.isSubmitSuccessful) {
-            reset({});
-        }
-    }, [formState, isSubmitSuccessful, reset]);
     return (
         <form className={"register-gateway"}>
-            <Card sx={{maxWidth: 500}}>
+            <Card sx={{maxWidth: 600}}>
                 <CardContent>
                     <Box
                         sx={{
-                            '& .MuiTextField-root': {m: 1, width: '25ch'},
+                            '& .MuiTextField-root': {m: 1, width: '50ch'},
                         }}
                         noValidate
                         autoComplete="off"
@@ -50,16 +55,26 @@ function AddGateway() {
                             Register Gateway
                         </Typography>
                         <Controller
-                            render={({ field }) => <TextField size="small" variant="outlined" label= "Gateway Name" {...field} />}
-                            name="gatewayName"
+                            render={({field}) => <TextField size="small" variant="outlined"
+                                                            label="Gateway Name" {...field} />}
+                            name="name"
                             control={control}
                             defaultValue=""
                         />
                         <Controller
-                            render={({ field }) => <TextField size="small" variant="outlined" label= "Gateway EUI" {...field} />}
-                            name="gatewayEUI"
+                            render={({field}) => <TextField size="small" variant="outlined"
+                                                            label="Gateway EUI" {...field} />}
+                            name="eui"
                             control={control}
                             defaultValue=""
+                        />
+                        <TextField
+                            id="filled-multiline-static"
+                            label="Log"
+                            multiline
+                            rows={7}
+                            value={logs}
+                            variant="filled"
                         />
                     </Box>
                 </CardContent>

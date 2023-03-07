@@ -2,14 +2,13 @@ import React, {useState, useEffect} from "react";
 import mqtt from "mqtt/dist/mqtt";
 import Status from "./Status";
 
-function MqttStatus({setConnectionStatus}) {
+function MqttStatus({setConnectionStatus, gatewayInfo}) {
     const [messages, setMessages] = useState({});
     const record = {
-        topic: "/gateway_location/ping",
+        topic: `/gateway/${gatewayInfo.eui}/status`,
         qos: 0,
     };
     const client = mqtt.connect("ws://broker.emqx.io:8083/mqtt");
-
     useEffect(() => {
         client.subscribe(record.topic, (error) => {
             console.log(`Subscribe on ${record.topic}`);

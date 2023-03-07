@@ -13,6 +13,7 @@ import MqttStatus from "./MqttStatus";
 import {useParams} from "react-router-dom";
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 import {randomCreatedDate} from "@mui/x-data-grid-generator";
+import Overview from "./Overview";
 
 function LinkTab(props) {
     return (<Tab
@@ -28,22 +29,18 @@ function LinkTab(props) {
 }
 
 function RealtimeMonitoring() {
-    const [page, setPage] = useState(0);
-    const {id} = useParams();
-    const [gateway, setGateway] = useState({
-        id: "eui-1016c001f160f149",
-        name: 'Waveshare SX1303 868M fyp-gch6-2',
-        eui: '0016c001f160f149',
-        dateCreated: randomCreatedDate(),
-        link: '0016c001f160f149',
-    });
+    const [page, setPage] = useState(1);
+    const {eui} = useParams();
+    const [gateway, setGateway] = useState({});
     const [connectionStatus, setConnectionStatus] = useState(false);
     const handlePage = (event, newValue) => {
         setPage(newValue);
     };
-    // useEffect(() => {
-    //
-    // }, [])
+    useEffect(() => {
+        fetch(`/api/gateway?eui=${eui}`)
+            .then(response => response.json())
+            .then(data => setGateway(data.data))
+    }, [])
     return (<Container sx={{minWidth: 1500, margin: "auto", overflow: "hidden"}}>
         <Typography sx={{mb: 1}} color="text.dark" variant="h5">
             {gateway.name}
@@ -52,15 +49,13 @@ function RealtimeMonitoring() {
             EUI: {gateway.eui}
         </Typography>
         <Grid sx={{display: "flex", mb: 1}}>
-            {connectionStatus ?
-                (<React.Fragment>
-                        <FiberManualRecordIcon sx={{mt: 0.4, mr: 1, color: "green", fontSize: "11pt"}}/>
-                        <Typography color="text.dark" variant="body2">
-                            Online
-                        </Typography>
-                    </React.Fragment>
-                ) :
-                (<React.Fragment><FiberManualRecordIcon sx={{mt: 0.4, mr: 1, color: "red", fontSize: "11pt"}}/>
+            {connectionStatus ? (<React.Fragment>
+                <FiberManualRecordIcon sx={{mt: 0.4, mr: 1, color: "green", fontSize: "11pt"}}/>
+                <Typography color="text.dark" variant="body2">
+                    Online
+                </Typography>
+            </React.Fragment>) : (
+                <React.Fragment><FiberManualRecordIcon sx={{mt: 0.4, mr: 1, color: "red", fontSize: "11pt"}}/>
                     <Typography color="text.dark" variant="body2">
                         Offline
                     </Typography></React.Fragment>)}
@@ -75,13 +70,16 @@ function RealtimeMonitoring() {
                     sx: {bgcolor: "#2196f3", borderRadius: 0},
                 }}
             >
-                <LinkTab value={0} icon={<Person/>} label="Status"/>
-                <LinkTab value={1} icon={<Tune/>} label="Control"/>
-                <LinkTab value={2} icon={<Lock/>} label="Security"/>
-                <LinkTab value={3} icon={<CreditCard/>} label="About"/>
+                <LinkTab value={0} icon={<Person/>} label="Overview"/>
+                <LinkTab value={1} icon={<Person/>} label="Live Data"/>
+                <LinkTab value={2} icon={<Tune/>} label="Control"/>
+                <LinkTab value={3} icon={<Lock/>} label="Security"/>
+                <LinkTab value={4} icon={<CreditCard/>} label="About"/>
             </Tabs>
         </Box>
-        {page === 0 && <MqttStatus setConnectionStatus={setConnectionStatus}/>}
+        {page === 0 && <Overview gatewayInfo={gateway}/>}
+        {page === 1 && Object.keys(gateway).length &&
+            <MqttStatus setConnectionStatus={setConnectionStatus} gatewayInfo={gateway}/>}
         {/*{page === 1 && <Status />}*/}
         {/*{page === 2 && <Status />}*/}
         {/*{page === 3 && <Status />}*/}
