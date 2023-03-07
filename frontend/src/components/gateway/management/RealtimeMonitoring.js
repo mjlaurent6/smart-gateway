@@ -14,6 +14,7 @@ import {useParams} from "react-router-dom";
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 import {randomCreatedDate} from "@mui/x-data-grid-generator";
 import Overview from "./Overview";
+import HistoricalView from "./HistoricalView";
 
 function LinkTab(props) {
     return (<Tab
@@ -72,15 +73,15 @@ function RealtimeMonitoring() {
             >
                 <LinkTab value={0} icon={<Person/>} label="Overview"/>
                 <LinkTab value={1} icon={<Person/>} label="Live Data"/>
-                <LinkTab value={2} icon={<Tune/>} label="Control"/>
-                <LinkTab value={3} icon={<Lock/>} label="Security"/>
-                <LinkTab value={4} icon={<CreditCard/>} label="About"/>
+                <LinkTab value={2} icon={<CreditCard/>} label="History"/>
+                <LinkTab value={3} icon={<Tune/>} label="Control"/>
+                <LinkTab value={4} icon={<Lock/>} label="Security"/>
             </Tabs>
         </Box>
         {page === 0 && <Overview gatewayInfo={gateway}/>}
         {page === 1 && Object.keys(gateway).length &&
             <MqttStatus setConnectionStatus={setConnectionStatus} gatewayInfo={gateway}/>}
-        {/*{page === 1 && <Status />}*/}
+        {page === 2 && <HistoricalView/>}
         {/*{page === 2 && <Status />}*/}
         {/*{page === 3 && <Status />}*/}
     </Container>);

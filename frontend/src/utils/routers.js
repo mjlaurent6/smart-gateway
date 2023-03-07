@@ -7,7 +7,7 @@ import Paperbase from "../components/Paperbase";
 import SignIn from "../components/SignIn";
 import SignUp from "../components/SignUp";
 import GatewayMainPage from "../components/gateway/GatewayMainPage";
-import Dashboard from "../components/Dashboard";
+import Dashboard from "../components/dashboard/Dashboard";
 
 const router = createBrowserRouter([
     {

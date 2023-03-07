@@ -6,10 +6,10 @@ import {useEffect, useState} from 'react'
 
 const MAPBOX_TOKEN = process.env.REACT_APP_MAPBOX_TOKEN;
 
-function MapView({location}) {
+function MapView({location, size = 1}) {
     console.log(`token ${process.env.MAPBOX_TOKEN}`)
     const [data, setData] = useState(location);
-    useEffect(()=>{
+    useEffect(() => {
         setData(location)
         setViewState({...location, zoom: 15})
     }, [location])
@@ -37,11 +37,12 @@ function MapView({location}) {
         longitude: data.longitude,
         zoom: 15
     })
+    const width = Number(1500 * size).toString();
     return (
         <Map
             {...viewState}
             onMove={evt => setViewState(evt.viewState)}
-            style={{width: '1500px', height: '500px'}}
+            style={{width: width, height: '500px'}}
             mapStyle="mapbox://styles/mapbox/streets-v9"
             mapboxAccessToken={MAPBOX_TOKEN}
         >

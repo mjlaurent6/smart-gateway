@@ -72,7 +72,7 @@ const rows = [
 export default function LiveDataGrid({setSelected, messages}) {
     // const [rows, setRows] = useState([]);
     return (
-        <Box sx={{height: '40vh', width: '100%', bgcolor: "white"}}>
+        <Box sx={{height: '500px', width: '100%', bgcolor: "white"}}>
             <DataGrid
                 getRowId={(row) => row.time}
                 getRowHeight={() => 'auto'}

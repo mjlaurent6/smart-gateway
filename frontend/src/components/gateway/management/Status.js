@@ -3,19 +3,7 @@ import React, {useEffect, useState} from "react";
 import MapView from "./MapView";
 import GatewayGrid from "./GatewayGrid";
 import LiveDataGrid from "./LiveDataGrid";
-
-function StatusCard({item, value}) {
-    return (<Card elevation={2}>
-        <CardContent>
-            <Typography sx={{fontSize: 14}} color="text.secondary" gutterBottom>
-                {item}
-            </Typography>
-            <Typography variant="h5" color="green">
-                {value}
-            </Typography>
-        </CardContent>
-    </Card>);
-}
+import StatusCard from "./StatusCard";
 
 function Status({payload, setConnectionStatus}) {
     const [messages, setMessages] = useState([]);

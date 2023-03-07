@@ -27,10 +27,6 @@ function Overview({gatewayInfo}) {
                     <GenInfo title={'Created at'} value={(new Date(gatewayInfo.createdAt)).toLocaleString()}/>
                 </Grid>
             </Grid>
-            <Grid item xs={5}>
-                <Typography variant="h6">Historical Data</Typography>
-                <BasicTable/>
-            </Grid>
         </Grid>
     )
 }
