@@ -1,6 +1,6 @@
 #### Snippet of frontend(ReactJS)`DockerFile`
 
-You will find this `DockerFile` inside **frontend** directory. 
+You will find this `DockerFile` inside **frontend** directory.
 
 ```bash
 # Create image based on the official Node image from dockerhub
@@ -22,6 +22,10 @@ EXPOSE ${FRONT_END_PORT}
 # Serve the app
 CMD ["npm", "start"]
 ```
+
 ##### Explanation of frontend(ReactJS) `DockerFile`
 
 Frontend `DockerFile` is almost the same as Backend `DockerFile`.
+
+Proxy Dev   "proxy": "http://localhost:8000/"
+Proxy Deploy   "proxy": "http://backend:3000/"

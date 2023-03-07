@@ -66,5 +66,5 @@
     "webpack-cli": "^5.0.1",
     "webpack-dev-server": "^4.11.1"
   },
-  "proxy": "http://localhost:8000/"
+  "proxy": "http://backend:3000/"
 }
