@@ -8,6 +8,8 @@
     "@mui/icons-material": "^5.11.9",
     "@mui/lab": "^5.0.0-alpha.120",
     "@mui/material": "^5.11.10",
+    "@mui/x-data-grid": "^6.0.0",
+    "@mui/x-data-grid-generator": "^6.0.0",
     "@reduxjs/toolkit": "^1.9.3",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
@@ -66,5 +68,5 @@
     "webpack-cli": "^5.0.1",
     "webpack-dev-server": "^4.11.1"
   },
-  "proxy": "http://backend:3000/"
+  "proxy": "http://localhost:8000/"
 }

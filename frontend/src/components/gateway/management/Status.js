@@ -28,13 +28,14 @@ function OnlineStatus({status}) {
     </div>);
 }
 
-function Status({payload}) {
+function Status({payload, setConnectionStatus}) {
     const [messages, setMessages] = useState();
     useEffect(() => {
         console.log(`initializing interval`);
         const interval = setInterval(() => {
             setMessages();
-        }, 40000);
+            setConnectionStatus(false);
+        }, 3000);
 
         return () => {
             console.log(`clearing interval`);
@@ -52,16 +53,10 @@ function Status({payload}) {
     const {
         temp, batt
     } = metrics || {};
-    const online_status = {
-        online: {text: "Online", color: "#00FF00"},
-        offline: {text: "Offline", color: "#FF0000"}
-    }
+
     return (<React.Fragment>
         <Grid container spacing={2} sx={{pb: 1}}>
-            <Grid item xs={12}>
-                <OnlineStatus status={messages ? online_status.online : online_status.offline}/>
-            </Grid>
-            {!time && <Grid item xs={3}><Typography>Data not available</Typography></Grid>}
+            {!time && <Grid item xs={3}><Typography>Realtime data not available</Typography></Grid>}
             {time && <Grid item xs={3}>
                 <StatusCard
                     item={"Last Updated"}

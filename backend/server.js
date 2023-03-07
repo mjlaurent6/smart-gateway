@@ -23,10 +23,11 @@ app.use(express.static(path.join(__dirname, "public")));
 //  adding routes
 // require("./routes")(app);
 require("./routes/login")(app);
+require("./routes/gateway")(app);
 
 app.on("ready", () => {
-    app.listen(3000, () => {
-        console.log("Server is up on port", 3000);
+    app.listen(8000, () => {
+        console.log("Server is up on port", 8000);
     });
 });
 
