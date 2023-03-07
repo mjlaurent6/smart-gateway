@@ -5,6 +5,8 @@ import GatewayGrid from "./GatewayGrid";
 import LiveDataGrid from "./LiveDataGrid";
 import StatusCard from "./StatusCard";
 import JsonViewer from "./JsonViewer";
+import Editor from "react-simple-code-editor";
+import {highlight, languages} from "prismjs/components/prism-core";
 
 function Status({payload, setConnectionStatus}) {
     const [messages, setMessages] = useState([]);
@@ -58,11 +60,17 @@ function Status({payload, setConnectionStatus}) {
                         <LiveDataGrid messages={messages} setSelected={setSelected}/>
                     </Card>
                 </Grid>
-                <Grid item xs={5}>
-                    <Card elevation={2}>
-                        <pre>{JSON.stringify(selected, null, 2)}</pre>
-                    </Card>
-                </Grid>
+                <Card elevation={2}>
+                    {selected && Object.keys(selected).length != 0 && <Editor
+                        value={JSON.stringify(selected, null, 2)}
+                        highlight={selected => highlight(selected, languages.js)}
+                        padding={10}
+                        style={{
+                            fontFamily: '"Fira code", "Fira Mono", monospace',
+                            fontSize: 12,
+                        }}
+                    />}
+                </Card>
 
             </React.Fragment>}
 
