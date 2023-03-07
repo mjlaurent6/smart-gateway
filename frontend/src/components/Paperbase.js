@@ -1,18 +1,18 @@
-import * as React from "react";
-import { ThemeProvider } from "@mui/material/styles";
-import useMediaQuery from "@mui/material/useMediaQuery";
-import CssBaseline from "@mui/material/CssBaseline";
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
-import Link from "@mui/material/Link";
-import Navigator from "./Navigator";
-import Content from "./gateway/contents/Content";
-import Header from "./Header";
-import { Outlet, useLocation } from "react-router-dom";
+import * as React from 'react';
+import {ThemeProvider} from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import CssBaseline from '@mui/material/CssBaseline';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import Link from '@mui/material/Link';
+import Navigator from './Navigator';
+import Content from './gateway/contents/Content';
+import Header from './Header';
+import {Outlet, useLocation} from 'react-router-dom';
 
 const drawerWidth = 256;
 
-export default function Paperbase({ content }) {
+export default function Paperbase({content}) {
   const [mobileOpen, setMobileOpen] = React.useState(false);
   // const location = useLocation();
   // console.log(location.pathname);
@@ -21,24 +21,24 @@ export default function Paperbase({ content }) {
   };
 
   return (
-    <Box sx={{ display: "flex", minHeight: "100vh" }}>
-      <CssBaseline />
+    <Box sx={{display: 'flex', minHeight: '100vh'}}>
+      <CssBaseline/>
       <Box
         component="nav"
-        sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
+        sx={{width: {sm: drawerWidth}, flexShrink: {sm: 0}}}
       >
         <Navigator
-          PaperProps={{ style: { width: drawerWidth } }}
-          sx={{ display: { sm: "block", xs: "none" } }}
+          PaperProps={{style: {width: drawerWidth}}}
+          sx={{display: {sm: 'block', xs: 'none'}}}
         />
       </Box>
-      <Box sx={{ flex: 1, display: "flex", flexDirection: "column" }}>
-        <Header onDrawerToggle={handleDrawerToggle} />
+      <Box sx={{flex: 1, display: 'flex', flexDirection: 'column'}}>
+        <Header onDrawerToggle={handleDrawerToggle}/>
         <Box
           component="main"
-          sx={{ flex: 1, py: 4, px: 2, bgcolor: "#eaeff1" }}
+          sx={{flex: 1, py: 4, px: 2, bgcolor: '#eaeff1'}}
         >
-          <Outlet />
+          <Outlet/>
         </Box>
       </Box>
     </Box>
