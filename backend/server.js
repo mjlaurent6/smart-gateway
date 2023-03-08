@@ -28,7 +28,7 @@ require("./routes/gateway")(app);
 require("./routes/end_device")(app);
 
 app.on("ready", () => {
-    app.listen(300, () => {
+    app.listen(3000, () => {
         console.log("Server is up on port", 3000);
     });
 });
