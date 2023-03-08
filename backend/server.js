@@ -28,8 +28,8 @@ require("./routes/gateway")(app);
 require("./routes/end_device")(app);
 
 app.on("ready", () => {
-    app.listen(8000, () => {
-        console.log("Server is up on port", 8000);
+    app.listen(300, () => {
+        console.log("Server is up on port", 3000);
     });
 });
 
