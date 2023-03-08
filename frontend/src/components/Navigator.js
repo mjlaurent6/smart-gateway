@@ -31,8 +31,8 @@ const categories = [
     {
         id: "End Device",
         children: [
-            {id: "Monitoring", icon: <Timeline/>, link: "/gateway"},
-            {id: "Register", icon: <Add/>, link: "/add-gateway"},
+            {id: "Monitoring", icon: <Timeline/>, link: "/end_device"},
+            {id: "Register", icon: <Add/>, link: "/end_device/register"},
         ],
     },
 ];

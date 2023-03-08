@@ -8,6 +8,9 @@ import SignIn from "../components/SignIn";
 import SignUp from "../components/SignUp";
 import GatewayMainPage from "../components/gateway/GatewayMainPage";
 import Dashboard from "../components/dashboard/Dashboard";
+import AddEndDevice from "../components/end_device/AddEndDevice";
+import EndDeviceMainPage from "../components/end_device/EndDeviceMainPage";
+import EndDeviceMonitoring from "../components/end_device/EndDeviceMonitoring";
 
 const router = createBrowserRouter([
     {
@@ -43,6 +46,24 @@ const router = createBrowserRouter([
             {
                 path: ":eui",
                 element: <RealtimeMonitoring/>,
+            },
+        ],
+    },
+    {
+        path: "/end_device",
+        element: <Paperbase/>,
+        children: [
+            {
+                path: "",
+                element: <EndDeviceMainPage/>,
+            },
+            {
+                path: "register",
+                element: <AddEndDevice/>,
+            },
+            {
+                path: ":devEui",
+                element: <EndDeviceMonitoring/>,
             },
         ],
     },

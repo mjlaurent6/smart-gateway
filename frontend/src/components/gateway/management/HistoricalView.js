@@ -80,12 +80,12 @@ function HistoricalView() {
     return (
         <React.Fragment>
             <Grid container spacing={2} sx={{pb: 1}}>
-                {selected && selected.message && selected.message.antenna_locations && <Grid item xs={7}>
+                <Grid item xs={8}>
                     <Card elevation={2}>
-                        <MapView location={selected.message.antenna_locations[0]} size={0.7}/>
+                        <LiveDataGrid messages={messages} setSelected={setSelected}/>
                     </Card>
-                </Grid>}
-                <Grid item xs={5}>
+                </Grid>
+                <Grid item xs={4}>
                     <Card elevation={2}>
                         {selected && Object.keys(selected).length != 0 && <Editor
                             value={JSON.stringify(selected, null, 2)}
@@ -98,11 +98,11 @@ function HistoricalView() {
                         />}
                     </Card>
                 </Grid>
-                <Grid item xs={12}>
+                {selected && selected.message && selected.message.antenna_locations && <Grid item xs={12}>
                     <Card elevation={2}>
-                        <LiveDataGrid messages={messages} setSelected={setSelected}/>
+                        <MapView location={selected.message.antenna_locations[0]} size={1}/>
                     </Card>
-                </Grid>
+                </Grid>}
             </Grid>
         </React.Fragment>
     )

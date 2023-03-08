@@ -60,20 +60,20 @@ function Status({payload, setConnectionStatus}) {
                         <LiveDataGrid messages={messages} setSelected={setSelected}/>
                     </Card>
                 </Grid>
-                <Card elevation={2}>
-                    {selected && Object.keys(selected).length != 0 && <Editor
-                        value={JSON.stringify(selected, null, 2)}
-                        highlight={selected => highlight(selected, languages.js)}
-                        padding={10}
-                        style={{
-                            fontFamily: '"Fira code", "Fira Mono", monospace',
-                            fontSize: 12,
-                        }}
-                    />}
-                </Card>
-
+                <Grid item xs={5}>
+                    <Card elevation={2}>
+                        {selected && Object.keys(selected).length != 0 && <Editor
+                            value={JSON.stringify(selected, null, 2)}
+                            highlight={selected => highlight(selected, languages.js)}
+                            padding={10}
+                            style={{
+                                fontFamily: '"Fira code", "Fira Mono", monospace',
+                                fontSize: 12,
+                            }}
+                        />}
+                    </Card>
+                </Grid>
             </React.Fragment>}
-
         </Grid>
     </React.Fragment>);
 }

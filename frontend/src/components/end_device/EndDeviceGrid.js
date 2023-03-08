@@ -14,19 +14,25 @@ const columns = [
     {
         field: 'name',
         headerName: 'Name',
-        width: 300,
+        width: 250,
         editable: false,
     },
     {
-        field: 'eui',
-        headerName: 'Gateway EUI',
-        width: 300,
+        field: 'appEui',
+        headerName: 'App EUI',
+        width: 250,
+        editable: false,
+    },
+    {
+        field: 'devEui',
+        headerName: 'Dev EUI',
+        width: 250,
         editable: false,
     },
     {
         field: 'createdAt',
         headerName: 'Date Created',
-        width: 200,
+        width: 250,
         editable: false,
         renderCell: (params) => {
             const date = new Date(params.value).toLocaleString('en-HK', {timeZone: 'Asia/Hong_Kong'})
@@ -35,11 +41,12 @@ const columns = [
     },
     {
         field: 'link',
-        headerName: 'Manage Gateway',
+        headerName: 'Manage End Device',
         width: 200,
         editable: false,
         renderCell: (params) => (
-            <Link to={`/gateway/${params.row.eui}`} style={{textDecoration: "none", color: "black"}}>Click here</Link>
+            <Link to={`/end_device/${params.row.devEui}`} style={{textDecoration: "none", color: "black"}}>Click
+                here</Link>
         )
     },
 ];
@@ -75,10 +82,10 @@ const columns = [
 //     },
 // ];
 
-export default function GatewayGrid() {
+export default function EndDeviceGrid() {
     const [rows, setRows] = useState([]);
     useEffect(() => {
-        fetch("/api/gateway")
+        fetch("/api/end_device")
             .then(response => response.json())
             // 4. Setting *dogImage* to the image url that we received from the response above
             .then(data => setRows(data.data))
@@ -87,9 +94,9 @@ export default function GatewayGrid() {
     return (
         <React.Fragment>
             <Typography sx={{mb: 1}} color="text.dark" variant="h6">
-                Registered Gateways
+                Registered End Device
             </Typography>
-            <Box sx={{height: '595px', width: '1450px', bgcolor: "white"}}>
+            <Box sx={{height: '80vh', width: '1450px', bgcolor: "white"}}>
                 <DataGrid
                     getRowId={(row) => row._id}
                     rows={rows}
